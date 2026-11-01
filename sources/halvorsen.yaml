@@ -1,0 +1,47 @@
+# Fictional onboarding customer used for the end-to-end demo. `gold` is the hand-labelled correct canonical field
+# for each source column (null = should not be mapped). Split "dev": the mock mapper's lexicon was developed
+# while looking at this source.
+name: halvorsen
+company: Halvorsen Outdoor Gear (fictional)
+split: dev
+ids: {customer: "HOG-{n:05d}", sku: "HV{n:04d}", order: "SO-{n:06d}"}
+entities:
+  customers:
+    format: csv
+    styles: {signup_date: "mixed_dates", is_active: yn, country_code: mixed, segment: title, phone: us_dashes}
+    columns:
+      - {column: "Cust #", gold: customer_id}
+      - {column: "E-mail Address", gold: email}
+      - {column: "Contact Name", gold: full_name}
+      - {column: "Account", gold: company_name}
+      - {column: "Tel", gold: phone}
+      - {column: "Ctry", gold: country_code}
+      - {column: "Tier", gold: segment}
+      - {column: "Created On", gold: signup_date}
+      - {column: "Active?", gold: is_active}
+      - {column: "Notes", gold: null, decoy: free_text}
+      - {column: "Legacy Ref", gold: null, decoy: legacy_id}
+  products:
+    format: csv
+    styles: {unit_price: dollar_commas, is_discontinued: yn, category: title}
+    columns:
+      - {column: "Item Code", gold: sku}
+      - {column: "Description", gold: product_name}
+      - {column: "Product Line", gold: category}
+      - {column: "List Price", gold: unit_price}
+      - {column: "Curr", gold: currency}
+      - {column: "Disc. Flag", gold: is_discontinued}
+      - {column: "Weight (kg)", gold: null, decoy: float_small}
+  orders:
+    format: api
+    styles: {status: upper, order_ts: iso_z, updated_at: iso_z, unit_price: string_number}
+    columns:
+      - {column: "id", gold: order_id}
+      - {column: "account_ref", gold: customer_id}
+      - {column: "item", gold: sku}
+      - {column: "qty", gold: quantity}
+      - {column: "price", gold: unit_price}
+      - {column: "placed_at", gold: order_ts}
+      - {column: "state", gold: status}
+      - {column: "modified", gold: updated_at}
+      - {column: "sales_rep", gold: null, decoy: person_name}

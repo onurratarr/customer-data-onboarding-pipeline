@@ -1,0 +1,1 @@
+httpx>=0.27  # only for MAPPER_BACKEND=openai

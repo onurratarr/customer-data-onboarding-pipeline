@@ -1,0 +1,49 @@
+# Data quality checks, dbt-style. severity: error fails the run; warn is reported but does not block.
+sources:
+  - name: landing
+    tables:
+      - name: orders
+        freshness: {loaded_at_field: updated_at, warn_after_hours: 48, error_after_hours: 168}
+models:
+  - name: stg_customers
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: email
+        tests: [not_null, {unique: {severity: warn}}]
+      - name: country_code
+        tests: [{accepted_values: {values: [US, CA, GB, DE, FR, NL, SE, "NO"]}}]
+      - name: segment
+        tests: [{accepted_values: {values: [enterprise, mid_market, smb]}}]
+  - name: stg_products
+    columns:
+      - name: sku
+        tests: [unique, not_null]
+      - name: currency
+        tests: [{accepted_values: {values: [USD, EUR, GBP]}}]
+      - name: unit_price
+        tests: [not_null, {expression_is_true: {expression: "unit_price >= 0"}}]
+  - name: stg_orders
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: status
+        tests: [{accepted_values: {values: [placed, shipped, delivered, cancelled, returned]}}]
+      - name: customer_id
+        tests: [not_null, {relationships: {to: stg_customers, field: customer_id, severity: warn}}]
+      - name: sku
+        tests: [{relationships: {to: stg_products, field: sku}}]
+      - name: quantity
+        tests: [{expression_is_true: {expression: "quantity > 0"}}]
+      - name: updated_at
+        tests: [{expression_is_true: {expression: "updated_at >= order_ts"}}]
+  - name: dim_customers
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+  - name: fct_orders
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: recognized_revenue
+        tests: [{expression_is_true: {expression: "recognized_revenue >= 0"}}]

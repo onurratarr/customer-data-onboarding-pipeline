@@ -1,0 +1,45 @@
+# Synthetic CRM-style export (camel-case headers). Split "dev": seen while developing the mock lexicon.
+name: crm_export
+company: Fictional CRM-style export
+split: dev
+ids: {customer: "ACC{n:06d}", sku: "PRD-{n:03d}", order: "ORD{n:08d}"}
+entities:
+  customers:
+    format: csv
+    styles: {signup_date: "%Y-%m-%d", is_active: true_false, country_code: names, segment: title, phone: intl}
+    columns:
+      - {column: "AccountNumber", gold: customer_id}
+      - {column: "PrimaryEmail", gold: email}
+      - {column: "ContactFullName", gold: full_name}
+      - {column: "AccountName", gold: company_name}
+      - {column: "MobilePhone", gold: phone}
+      - {column: "BillingCountry", gold: country_code}
+      - {column: "CustomerSegment", gold: segment}
+      - {column: "AccountCreatedDate", gold: signup_date}
+      - {column: "IsActive", gold: is_active}
+      - {column: "OwnerId", gold: null, decoy: user_id_code}
+      - {column: "LastModifiedBy", gold: null, decoy: person_name}
+  products:
+    format: csv
+    styles: {unit_price: plain, is_discontinued: true_false, category: title}
+    columns:
+      - {column: "ProductCode", gold: sku}
+      - {column: "ProductName", gold: product_name}
+      - {column: "Family", gold: category}
+      - {column: "UnitPrice", gold: unit_price}
+      - {column: "CurrencyIsoCode", gold: currency}
+      - {column: "IsArchived", gold: is_discontinued}
+      - {column: "ExternalId", gold: null, decoy: legacy_id}
+  orders:
+    format: csv
+    styles: {status: title, order_ts: "%Y-%m-%d %H:%M:%S", updated_at: iso_z, unit_price: plain}
+    columns:
+      - {column: "OrderNumber", gold: order_id}
+      - {column: "AccountNumber", gold: customer_id}
+      - {column: "ProductCode", gold: sku}
+      - {column: "Quantity", gold: quantity}
+      - {column: "UnitPrice", gold: unit_price}
+      - {column: "EffectiveDate", gold: order_ts}
+      - {column: "Status", gold: status}
+      - {column: "SystemModstamp", gold: updated_at}
+      - {column: "Description", gold: null, decoy: free_text}

@@ -1,0 +1,10 @@
+[project]
+name = "customer-data-onboarding-pipeline"
+version = "0.1.0"
+description = "Reference implementation: onboarding a fictional customer's messy data into a warehouse (synthetic data)"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "tests"]

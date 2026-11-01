@@ -1,0 +1,46 @@
+# Synthetic e-commerce-platform export (snake-case). Split "heldout": written together with the other source
+# specs before the mock lexicon, and never used to tune it.
+name: shop_heldout
+company: Fictional e-commerce platform export
+split: heldout
+ids: {customer: "u_{n:06d}", sku: "VAR-{n:04d}-STD", order: "#{n:06d}"}
+entities:
+  customers:
+    format: csv
+    styles: {signup_date: iso_z, is_active: one_zero, country_code: iso3, segment: lower, phone: intl}
+    columns:
+      - {column: "user_id", gold: customer_id}
+      - {column: "contact_email", gold: email}
+      - {column: "display_name", gold: full_name}
+      - {column: "org", gold: company_name}
+      - {column: "phone_number", gold: phone}
+      - {column: "country", gold: country_code}
+      - {column: "plan", gold: segment}
+      - {column: "registered_at", gold: signup_date}
+      - {column: "enabled", gold: is_active}
+      - {column: "utm_source", gold: null, decoy: code_short}
+      - {column: "last_login_ip", gold: null, decoy: ip}
+  products:
+    format: csv
+    styles: {unit_price: plain, is_discontinued: true_false, category: lower}
+    columns:
+      - {column: "variant_sku", gold: sku}
+      - {column: "title", gold: product_name}
+      - {column: "collection", gold: category}
+      - {column: "price", gold: unit_price}
+      - {column: "price_currency", gold: currency}
+      - {column: "archived", gold: is_discontinued}
+      - {column: "inventory_qty", gold: null, decoy: int_small}
+  orders:
+    format: csv
+    styles: {status: lower, order_ts: iso_z, updated_at: iso_z, unit_price: plain}
+    columns:
+      - {column: "order_ref", gold: order_id}
+      - {column: "buyer_id", gold: customer_id}
+      - {column: "variant_sku", gold: sku}
+      - {column: "units", gold: quantity}
+      - {column: "item_price", gold: unit_price}
+      - {column: "created", gold: order_ts}
+      - {column: "fulfillment_status", gold: status}
+      - {column: "last_updated", gold: updated_at}
+      - {column: "gift_note", gold: null, decoy: free_text}

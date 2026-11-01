@@ -1,0 +1,92 @@
+source: halvorsen
+entity: customers
+version: 1
+status: approved
+supersedes: null
+proposed_by: mock-lexicon-v1
+reviewed_by: repo author (demo review)
+reviewed_at: '2026-11-01T16:29:29Z'
+source_columns:
+- 'Cust #'
+- E-mail Address
+- Contact Name
+- Account
+- Tel
+- Ctry
+- Tier
+- Created On
+- Active?
+- Notes
+- Legacy Ref
+source_columns_sha: 7729d46109198646
+summary:
+  accepted: 9
+  edited: 0
+  rejected: 2
+columns:
+- source_column: 'Cust #'
+  target: customer_id
+  proposed_target: customer_id
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: E-mail Address
+  target: email
+  proposed_target: email
+  confidence: 0.995
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Contact Name
+  target: full_name
+  proposed_target: full_name
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Account
+  target: company_name
+  proposed_target: company_name
+  confidence: 0.91
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Tel
+  target: phone
+  proposed_target: phone
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Ctry
+  target: country_code
+  proposed_target: country_code
+  confidence: 0.999
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Tier
+  target: segment
+  proposed_target: segment
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Created On
+  target: signup_date
+  proposed_target: signup_date
+  confidence: 0.994
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Active?
+  target: is_active
+  proposed_target: is_active
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Notes
+  target: null
+  proposed_target: null
+  confidence: 0.64
+  decision: rejected
+  note: scripted decision
+- source_column: Legacy Ref
+  target: null
+  proposed_target: null
+  confidence: 0.55
+  decision: rejected
+  note: scripted decision

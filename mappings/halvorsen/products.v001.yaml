@@ -1,0 +1,64 @@
+source: halvorsen
+entity: products
+version: 1
+status: approved
+supersedes: null
+proposed_by: mock-lexicon-v1
+reviewed_by: repo author (demo review)
+reviewed_at: '2026-11-01T16:29:29Z'
+source_columns:
+- Item Code
+- Description
+- Product Line
+- List Price
+- Curr
+- Disc. Flag
+- Weight (kg)
+source_columns_sha: b8a77a99dc99b377
+summary:
+  accepted: 6
+  edited: 0
+  rejected: 1
+columns:
+- source_column: Item Code
+  target: sku
+  proposed_target: sku
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Description
+  target: product_name
+  proposed_target: product_name
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Product Line
+  target: category
+  proposed_target: category
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: List Price
+  target: unit_price
+  proposed_target: unit_price
+  confidence: 0.989
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Curr
+  target: currency
+  proposed_target: currency
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Disc. Flag
+  target: is_discontinued
+  proposed_target: is_discontinued
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: Weight (kg)
+  target: null
+  proposed_target: null
+  confidence: 0.55
+  decision: rejected
+  note: scripted decision

@@ -1,0 +1,46 @@
+# Synthetic ERP-style export (upper-case abbreviations). Split "heldout": written together with the other source
+# specs before the mock lexicon, and never used to tune it.
+name: erp_heldout
+company: Fictional ERP-style export
+split: heldout
+ids: {customer: "{n:07d}", sku: "MAT-{n:05d}", order: "45{n:08d}"}
+entities:
+  customers:
+    format: csv
+    styles: {signup_date: "%d.%m.%Y", is_active: x_blank, country_code: iso2, segment: codes, phone: intl}
+    columns:
+      - {column: "CUST_NO", gold: customer_id}
+      - {column: "EMAIL_ADDR", gold: email}
+      - {column: "CONTACT_PERSON", gold: full_name}
+      - {column: "CUST_NAME", gold: company_name}
+      - {column: "PHONE_1", gold: phone}
+      - {column: "CNTRY_CD", gold: country_code}
+      - {column: "CUST_CLASS", gold: segment}
+      - {column: "OPEN_DT", gold: signup_date}
+      - {column: "STATUS_FLG", gold: is_active}
+      - {column: "CREDIT_LIMIT", gold: null, decoy: money}
+      - {column: "SALES_ORG", gold: null, decoy: code_short}
+  products:
+    format: csv
+    styles: {unit_price: plain, is_discontinued: x_blank, category: upper}
+    columns:
+      - {column: "MATERIAL_NO", gold: sku}
+      - {column: "MAT_DESC", gold: product_name}
+      - {column: "MAT_GROUP", gold: category}
+      - {column: "NET_PRICE", gold: unit_price}
+      - {column: "CURRENCY_KEY", gold: currency}
+      - {column: "DELETION_FLAG", gold: is_discontinued}
+      - {column: "BASE_UOM", gold: null, decoy: uom}
+  orders:
+    format: csv
+    styles: {status: codes, order_ts: "%Y%m%d%H%M%S", updated_at: "%Y%m%d%H%M%S", unit_price: plain}
+    columns:
+      - {column: "SO_NUMBER", gold: order_id}
+      - {column: "SOLD_TO", gold: customer_id}
+      - {column: "MATERIAL_NO", gold: sku}
+      - {column: "ORDER_QTY", gold: quantity}
+      - {column: "NET_PRICE", gold: unit_price}
+      - {column: "CREATED_TS", gold: order_ts}
+      - {column: "DOC_STATUS", gold: status}
+      - {column: "CHANGED_TS", gold: updated_at}
+      - {column: "PLANT", gold: null, decoy: code_short}

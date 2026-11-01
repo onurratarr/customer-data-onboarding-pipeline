@@ -1,0 +1,9 @@
+# Decisions from the demo review of the Halvorsen (fictional) proposals. Everything at confidence >= 0.9 was
+# accepted with --accept-above 0.9; the lines below are what a human looked at explicitly.
+customers:
+  Notes: null          # free text, no canonical field
+  Legacy Ref: null     # old system id; not the customer key
+products:
+  Weight (kg): null    # not in the canonical product schema (yet)
+orders:
+  placed_at: order_ts  # 0.78: header is only a fuzzy match, values are timestamps; confirmed with the sample

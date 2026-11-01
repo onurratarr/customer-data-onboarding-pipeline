@@ -1,0 +1,46 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q
+      - name: End-to-end demo (day 1, day 2, re-run day 2)
+        run: python -m cdop demo
+      - name: Mapping eval reproduces committed results (synthetic data)
+        run: python -m cdop eval-mapping --check
+  postgres:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: cdop
+          POSTGRES_PASSWORD: cdop
+          POSTGRES_DB: cdop
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U cdop" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      WAREHOUSE_URL: postgresql://cdop:cdop@localhost:5432/cdop
+      CDOP_TEST_PG_URL: postgresql://cdop:cdop@localhost:5432/cdop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt -r requirements-postgres.txt
+      - name: End-to-end demo on Postgres
+        run: python -m cdop demo
+      - name: Postgres results match DuckDB
+        run: python -m pytest -q tests/test_pipeline.py -k postgres -rs

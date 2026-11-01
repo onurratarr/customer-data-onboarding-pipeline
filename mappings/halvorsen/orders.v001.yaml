@@ -1,0 +1,78 @@
+source: halvorsen
+entity: orders
+version: 1
+status: approved
+supersedes: null
+proposed_by: mock-lexicon-v1
+reviewed_by: repo author (demo review)
+reviewed_at: '2026-11-01T16:29:29Z'
+source_columns:
+- id
+- account_ref
+- item
+- qty
+- price
+- placed_at
+- state
+- modified
+- sales_rep
+source_columns_sha: 3f9a6beb1f886859
+summary:
+  accepted: 9
+  edited: 0
+  rejected: 0
+columns:
+- source_column: id
+  target: order_id
+  proposed_target: order_id
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: account_ref
+  target: customer_id
+  proposed_target: customer_id
+  confidence: 0.994
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: item
+  target: sku
+  proposed_target: sku
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: qty
+  target: quantity
+  proposed_target: quantity
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: price
+  target: unit_price
+  proposed_target: unit_price
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: placed_at
+  target: order_ts
+  proposed_target: order_ts
+  confidence: 0.78
+  decision: accepted
+  note: scripted decision
+- source_column: state
+  target: status
+  proposed_target: status
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: modified
+  target: updated_at
+  proposed_target: updated_at
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)
+- source_column: sales_rep
+  target: null
+  proposed_target: null
+  confidence: 1.0
+  decision: accepted
+  note: auto-accepted (confidence >= 0.9)

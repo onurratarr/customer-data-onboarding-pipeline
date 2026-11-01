@@ -1,0 +1,201 @@
+{
+  "label": "SYNTHETIC DATA: hand-labelled gold mappings for fictional sources; not a client benchmark",
+  "mapper": "mock-lexicon-v1",
+  "splits": {
+    "dev": {
+      "all": {
+        "columns": 54,
+        "gold_mappings": 46,
+        "proposed": 46,
+        "correct": 46,
+        "precision": 1.0,
+        "recall": 1.0,
+        "decoys": 8,
+        "decoys_left_unmapped": 8
+      },
+      ">=0.6": {
+        "columns": 54,
+        "gold_mappings": 46,
+        "proposed": 46,
+        "correct": 46,
+        "precision": 1.0,
+        "recall": 1.0,
+        "decoys": 8,
+        "decoys_left_unmapped": 8
+      },
+      ">=0.8": {
+        "columns": 54,
+        "gold_mappings": 46,
+        "proposed": 45,
+        "correct": 45,
+        "precision": 1.0,
+        "recall": 0.978,
+        "decoys": 8,
+        "decoys_left_unmapped": 8
+      },
+      ">=0.9": {
+        "columns": 54,
+        "gold_mappings": 46,
+        "proposed": 43,
+        "correct": 43,
+        "precision": 1.0,
+        "recall": 0.935,
+        "decoys": 8,
+        "decoys_left_unmapped": 8
+      }
+    },
+    "heldout": {
+      "all": {
+        "columns": 54,
+        "gold_mappings": 46,
+        "proposed": 43,
+        "correct": 40,
+        "precision": 0.93,
+        "recall": 0.87,
+        "decoys": 8,
+        "decoys_left_unmapped": 7
+      },
+      ">=0.6": {
+        "columns": 54,
+        "gold_mappings": 46,
+        "proposed": 33,
+        "correct": 32,
+        "precision": 0.97,
+        "recall": 0.696,
+        "decoys": 8,
+        "decoys_left_unmapped": 8
+      },
+      ">=0.8": {
+        "columns": 54,
+        "gold_mappings": 46,
+        "proposed": 11,
+        "correct": 11,
+        "precision": 1.0,
+        "recall": 0.239,
+        "decoys": 8,
+        "decoys_left_unmapped": 8
+      },
+      ">=0.9": {
+        "columns": 54,
+        "gold_mappings": 46,
+        "proposed": 9,
+        "correct": 9,
+        "precision": 1.0,
+        "recall": 0.196,
+        "decoys": 8,
+        "decoys_left_unmapped": 8
+      }
+    }
+  },
+  "sources": {
+    "crm_export": {
+      "split": "dev",
+      "columns": 27,
+      "gold_mappings": 23,
+      "proposed": 23,
+      "correct": 23,
+      "precision": 1.0,
+      "recall": 1.0,
+      "decoys": 4,
+      "decoys_left_unmapped": 4
+    },
+    "erp_heldout": {
+      "split": "heldout",
+      "columns": 27,
+      "gold_mappings": 23,
+      "proposed": 22,
+      "correct": 21,
+      "precision": 0.955,
+      "recall": 0.913,
+      "decoys": 4,
+      "decoys_left_unmapped": 3
+    },
+    "halvorsen": {
+      "split": "dev",
+      "columns": 27,
+      "gold_mappings": 23,
+      "proposed": 23,
+      "correct": 23,
+      "precision": 1.0,
+      "recall": 1.0,
+      "decoys": 4,
+      "decoys_left_unmapped": 4
+    },
+    "shop_heldout": {
+      "split": "heldout",
+      "columns": 27,
+      "gold_mappings": 23,
+      "proposed": 21,
+      "correct": 19,
+      "precision": 0.905,
+      "recall": 0.826,
+      "decoys": 4,
+      "decoys_left_unmapped": 4
+    }
+  },
+  "errors": [
+    {
+      "source": "erp_heldout",
+      "split": "heldout",
+      "entity": "products",
+      "column": "MAT_GROUP",
+      "gold": "category",
+      "target": null,
+      "confidence": 0.55
+    },
+    {
+      "source": "erp_heldout",
+      "split": "heldout",
+      "entity": "products",
+      "column": "BASE_UOM",
+      "gold": null,
+      "target": "category",
+      "confidence": 0.45
+    },
+    {
+      "source": "erp_heldout",
+      "split": "heldout",
+      "entity": "orders",
+      "column": "SOLD_TO",
+      "gold": "customer_id",
+      "target": null,
+      "confidence": 0.55
+    },
+    {
+      "source": "shop_heldout",
+      "split": "heldout",
+      "entity": "customers",
+      "column": "org",
+      "gold": "company_name",
+      "target": null,
+      "confidence": 0.55
+    },
+    {
+      "source": "shop_heldout",
+      "split": "heldout",
+      "entity": "customers",
+      "column": "registered_at",
+      "gold": "signup_date",
+      "target": null,
+      "confidence": 0.64
+    },
+    {
+      "source": "shop_heldout",
+      "split": "heldout",
+      "entity": "orders",
+      "column": "order_ref",
+      "gold": "order_id",
+      "target": "customer_id",
+      "confidence": 0.502
+    },
+    {
+      "source": "shop_heldout",
+      "split": "heldout",
+      "entity": "orders",
+      "column": "buyer_id",
+      "gold": "customer_id",
+      "target": "order_id",
+      "confidence": 0.78
+    }
+  ]
+}

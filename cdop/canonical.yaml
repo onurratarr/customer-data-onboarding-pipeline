@@ -1,0 +1,34 @@
+# Canonical schema every customer's data is mapped onto. Descriptions are what a mapping model sees.
+entities:
+  customers:
+    key: customer_id
+    fields:
+      customer_id: {type: id, required: true, description: "Customer account identifier in the source system"}
+      email: {type: email, required: true, description: "Primary contact email address"}
+      full_name: {type: person_name, description: "Name of the primary contact person"}
+      company_name: {type: org_name, description: "Name of the customer company / account"}
+      phone: {type: phone, description: "Primary contact phone number"}
+      country_code: {type: country, description: "Customer country as ISO 3166-1 alpha-2 code"}
+      segment: {type: category, accepted: [enterprise, mid_market, smb], description: "Customer segment / tier"}
+      signup_date: {type: date, description: "Date the customer account was created"}
+      is_active: {type: boolean, description: "Whether the account is currently active"}
+  products:
+    key: sku
+    fields:
+      sku: {type: id, required: true, description: "Product / item code (SKU)"}
+      product_name: {type: text, required: true, description: "Product name or short description"}
+      category: {type: category, description: "Product category, family or line"}
+      unit_price: {type: money, required: true, description: "List price per unit"}
+      currency: {type: currency, accepted: [USD, EUR, GBP], description: "ISO 4217 currency of the price"}
+      is_discontinued: {type: boolean, description: "Whether the product is discontinued / archived"}
+  orders:
+    key: order_id
+    fields:
+      order_id: {type: id, required: true, description: "Order / sales document identifier"}
+      customer_id: {type: id, required: true, description: "Identifier of the customer who placed the order"}
+      sku: {type: id, required: true, description: "Product code ordered"}
+      quantity: {type: integer, required: true, description: "Units ordered"}
+      unit_price: {type: money, required: true, description: "Price per unit on the order"}
+      order_ts: {type: timestamp, required: true, description: "When the order was placed"}
+      status: {type: category, required: true, accepted: [placed, shipped, delivered, cancelled, returned], description: "Order status"}
+      updated_at: {type: timestamp, required: true, description: "When the order record was last modified"}
